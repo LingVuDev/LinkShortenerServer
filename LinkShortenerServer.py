@@ -3,6 +3,7 @@
 import http.server
 import string
 import random
+import os
 
 import requests
 from urllib.parse import unquote, parse_qs
@@ -102,6 +103,7 @@ class Shortener(http.server.BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
+    serverport = int(os.environ.get('PORT', 8000))
     server_address = ('', serverport)
     httpd = http.server.HTTPServer(server_address, Shortener)
     httpd.serve_forever()
