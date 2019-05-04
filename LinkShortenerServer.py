@@ -67,8 +67,7 @@ class Shortener(http.server.BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/html')
             self.end_headers()
             # List the known associations in the form.
-            known = "\n".join("{} : {}".format(memory[key]['name'], socket.gethostname() + ":" +
-                                               str(serverport) + "/" + key)
+            known = "\n".join("{} : {}".format(memory[key]['name'], "/" + key)
                               for key in sorted(memory.keys()))
             self.wfile.write(form.format(known).encode())
 
