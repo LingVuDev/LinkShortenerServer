@@ -4,6 +4,7 @@ import http.server
 import string
 import random
 import os
+import socket
 
 import requests
 from urllib.parse import unquote, parse_qs
@@ -66,7 +67,7 @@ class Shortener(http.server.BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/html')
             self.end_headers()
             # List the known associations in the form.
-            known = "\n".join("{} : {}".format(memory[key]['name'], os.uname()[1] + ":" +
+            known = "\n".join("{} : {}".format(memory[key]['name'], socket.gethostname() + ":" +
                                                str(serverport) + "/" + key)
                               for key in sorted(memory.keys()))
             self.wfile.write(form.format(known).encode())
